@@ -165,3 +165,18 @@ exports.supplierDashboardAnalysis = asyncHandler(async (req, res, next) => {
 exports.supplierDashboardAnalysis = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: "Employee Analysis" });
 });
+
+exports.approvedBySupplier = asyncHandler(async (req, res, next) => {
+  const cargo = await Cargo.findById(req.params.id);
+  cargo.isApprovedBySupplier = true;
+  const updatedCargo = await cargo.save();
+  res.status(200).json({ success: true, cargo: updatedCargo });
+});
+
+exports.approvedByCustomer = asyncHandler(async (req, res, next) => {
+  const cargo = await Cargo.findById(req.params.id);
+  cargo.isApprovedByOwner = true;
+  cargo.status = "not delivered";
+  const updatedCargo = await cargo.save();
+  res.status(200).json({ success: true, cargo: updatedCargo });
+});
