@@ -28,7 +28,9 @@ function App() {
     functionName: "heartBeat",
     args: [],
   });
+  
 
+ 
   async function createPkg(
     _receiver: Address,
     supplier: Address,
@@ -66,7 +68,7 @@ function App() {
     console.log(res);
 
     // setTimeout(() => {
-    addPkgDetails(
+   return addPkgDetails(
       _label,
       _weight,
       _height,
@@ -112,9 +114,13 @@ function App() {
       chainId: 1337,
     });
   }
+  
+
+ 
+
 
   async function approveBySupplier(batchId: number) {
-    return simulateContract(config, {
+    return writeContract(config, {
       abi,
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       functionName: "approveBySupplier",
@@ -124,7 +130,7 @@ function App() {
   }
 
   async function approveByReceiver(batchId: number) {
-    return simulateContract(config, {
+    return writeContract(config, {
       abi,
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       functionName: "approveByReceiver",
@@ -133,32 +139,36 @@ function App() {
     });
   }
 
-  function getTendersOfSupplier(supplier: Address) {
-    return readContract(config, {
-      abi,
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      functionName: "getTenderDataOfSupplier",
-      args: [supplier],
-    });
-  }
 
-  function getTendersOfCustomer() {
-    return readContract(config, {
-      abi,
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      functionName: "getTendersOfCutomer",
-      args: [],
-    });
-  }
+function getTendersOfSupplier(supplier:Address){
+  return readContract(config,{
+    abi,
+    address:"0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    functionName:"getTendersOfSupplier",
+    args:[supplier]        
+  })
+}
 
-  function getTendersOfReceiver(receiver: Address) {
-    return readContract(config, {
-      abi,
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      functionName: "getTendersOfCutomer",
-      args: [receiver],
-    });
-  }
+
+function getTendersOfCustomer(){
+  return  readContract(config,{
+     abi,
+     address:"0x5FbDB2315678afecb367f032d93F642f64180aa3",
+     functionName:"getTendersOfCutomer",
+     args:[]        
+   })
+ }
+
+function getTendersOfReceiver(receiver:Address){
+ return  readContract(config,{
+    abi,
+    address:"0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    functionName:"getTendersOfReceiver",
+    args:[
+      receiver
+    ]        
+  })
+}
 
   // const unwatch = watchContractEvent(config,{
   //   address: '0x6b175474e89094c44da98b954eedeac495271d0f',
@@ -205,32 +215,51 @@ function App() {
         ))}
         <div>{status}</div>
         <div>{error?.message}</div>
-        <button
-          onClick={async (ev) => {
-            console.log(
-              await createPkg(
-                "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-                "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-                "NY",
-                "AMS",
-                "0.1",
-                "12-04-2024",
-                "softship",
-                300,
-                300,
-                300,
-                300,
-                300,
-                300,
-                0,
-                true,
-                false
-              )
-            );
-          }}
-        >
-          upload Pkg
-        </button>
+        <button onClick={async ev=> {
+
+console.log(
+  await createPkg(
+    "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+  "NY",
+  "AMS",
+  "0.1",
+   "12-04-2024",
+   "softship",
+  300,
+  300,
+  300,
+  300,
+  300,
+  300,
+  0,
+  true,
+  false
+  )
+);
+
+          
+        }}>upload Pkg</button>
+
+
+<button onClick={async ev => {
+    const tenders = await getTendersOfSupplier("0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC");
+    console.log(tenders);
+    
+}} >Get Supplier Tenders</button>
+
+<button onClick={async ev => {
+    const tenders = await getTendersOfCustomer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
+    console.log(tenders);
+    
+}}>Get Customer Tenders</button>
+
+<button onClick={async ev => {
+    const tenders = await getTendersOfReceiver("0x70997970C51812dc3A010C7d01b50e0d17dc79C8");
+    console.log(tenders);
+    
+}}>Get Receiver Tenders</button>
+
       </div>
     </>
   );

@@ -3,6 +3,16 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import { useAccount, useConnect, useDisconnect, useReadContract } from "wagmi";
+import abi from "../../../public/abi/SoftlinkSupplyChainContract.json";
+import { Address, StringToBytesOpts, parseEther } from "viem";
+import {
+  readContract,
+  simulateContract,
+  watchContractEvent,
+  writeContract,
+} from "wagmi/actions";
+import { config } from "../../../wagmi";
 
 import {
   Dialog,
@@ -63,6 +73,116 @@ export default function CustomerQuot() {
         }
       );
 
+<<<<<<< HEAD
+  
+  async function createPkg(
+    _receiver: Address,
+    supplier: Address,
+    _pickup: string,
+    _delivery: string,
+    _tenderBudget: string,
+    _expectedDate: string,
+    _label: string,
+    _weight: number,
+    _height: number,
+    _vol: number,
+    _len: number,
+    _wid: number,
+    _qty: number,
+    _p_type: number,
+    _stacking: boolean,
+    _cold_storage: boolean
+  ) {
+    const res = await writeContract(config, {
+      abi,
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      functionName: "registerTender",
+      args: [
+        _receiver,
+        supplier,
+        _pickup,
+        _delivery,
+        parseEther(_tenderBudget),
+        _expectedDate,
+      ],
+      value: parseEther(_tenderBudget),
+      chainId: 1337,
+    });
+
+    console.log(res);
+
+    // setTimeout(() => {
+   return addPkgDetails(
+      _label,
+      _weight,
+      _height,
+      _vol,
+      _len,
+      _wid,
+      _qty,
+      _p_type,
+      _stacking,
+      _cold_storage
+    );
+    // }, 3000);
+  }
+
+  async function addPkgDetails(
+    _label: string,
+    _weight: number,
+    _height: number,
+    _vol: number,
+    _len: number,
+    _wid: number,
+    _qty: number,
+    _p_type: number,
+    _stacking: boolean,
+    _cold_storage: boolean
+  ) {
+    return writeContract(config, {
+      abi,
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      functionName: "addTenderDetails",
+      args: [
+        _label,
+        _weight,
+        _height,
+        _vol,
+        _len,
+        _wid,
+        _qty,
+        _p_type,
+        _stacking,
+        _cold_storage,
+      ],
+      chainId: 1337,
+    });
+  }
+
+  const handleApprove = async (item:any) => {
+    const res = createPkg(
+      item.receiverWallet,
+      item.supplier,
+      item.pickup,
+      item.delivery,
+      item.depositBudget,
+      item.expectedDate,
+      item.label,
+      item.weight,
+      item.height,
+      item.vol,
+      item.len,
+      item.wid,
+      item.qty,
+      item.p_type,
+      item.stacking,
+      item.cold_storage
+    )
+
+
+
+  };
+=======
       console.log(response);
     } catch (error) {
       console.error("Error fetching supplier data:", error);
@@ -89,6 +209,7 @@ export default function CustomerQuot() {
     fetchSupplier();
   }, []);
   const handleApprove = () => {};
+>>>>>>> 3095b8d55c934957ccb54372b6088fbbf34a4b31
 
   return (
     <>
@@ -111,7 +232,7 @@ export default function CustomerQuot() {
                     <p>{item.label}</p>
                     <p>{item.supplier.name}</p>
                     <p>${item.depositBudget}</p>
-                    <Button onClick={() => handleApprove(item._id)}>
+                    <Button onClick={() => handleApprove(item)}>
                       Approve
                     </Button>
 

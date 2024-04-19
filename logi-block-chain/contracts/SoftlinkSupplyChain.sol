@@ -132,7 +132,7 @@ contract SoftlinkSupplyChain {
 
 
 function getTendersOfCutomer() public view returns (PackagingTender[] memory) {
-     uint[] memory x_cust_tends = supplier_tens[msg.sender];
+     uint[] memory x_cust_tends = cust_tends[msg.sender];
     PackagingTender[] memory supplier_cs = new PackagingTender[](x_cust_tends.length);
     for (uint i = 0; i < x_cust_tends.length; i++) {
         supplier_cs[i] = tenders[x_cust_tends[i]];

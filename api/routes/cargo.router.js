@@ -9,6 +9,7 @@ const {
   customerDashboardAnalysis,
   approvedBySupplier,
   approvedByCustomer,
+  getCargoData
 } = require("../controllers/cargo.controller");
 
 // middlewares
@@ -22,6 +23,7 @@ router.get(
   filterResults(Cargo, "owner supplier"),
   getAllCargo
 );
+router.get("/data",protect,getCargoData);
 router.route("/:id").get(protect, getSingleCargo).put(protect, updateCargo);
 router.get("/:id/supplier/approved", approvedBySupplier);
 router.get("/:id/customer/approved", approvedByCustomer);

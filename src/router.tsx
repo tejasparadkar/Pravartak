@@ -97,6 +97,12 @@ const router = createBrowserRouter([
       Component: (await import("./pages/landing/homepage")).default,
     }),
   },
+  {
+    path: "/bc",
+    lazy: async () => ({
+      Component: (await import("./App")).default,
+    }),
+  },
 ]);
 
 export default router;
