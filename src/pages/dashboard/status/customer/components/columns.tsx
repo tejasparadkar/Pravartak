@@ -37,22 +37,11 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const statusValue = row.getValue("status");
 
-      if (statusValue === "Approved") {
+      if (statusValue === "Delivered") {
         return (
           <div className="flex space-x-2">
             <div className="bg-green-100 px-2 py-1 rounded-md flex justify-center items-center space-x-4">
               <div className="bg-green-500 w-3 h-3 rounded-xl"></div>
-              <span className="max-w-30 truncate sm:max-w-72 md:max-w-[31rem]">
-                {statusValue}
-              </span>
-            </div>
-          </div>
-        );
-      } else if (statusValue === "Processing") {
-        return (
-          <div className="flex space-x-2">
-            <div className="bg-blue-100 px-2 py-1 rounded-md flex justify-center items-center space-x-4">
-              <div className="bg-blue-500 w-3 h-3 rounded-xl"></div>
               <span className="max-w-30 truncate sm:max-w-72 md:max-w-[31rem]">
                 {statusValue}
               </span>
@@ -70,7 +59,7 @@ export const columns: ColumnDef<Task>[] = [
             </div>
           </div>
         );
-      } else if (statusValue === "Completed") {
+      } else if (statusValue === "Not Delivered") {
         return (
           <div className="flex space-x-2">
             <div className="bg-purple-100 px-2 py-1 rounded-md flex justify-center items-center space-x-4">

@@ -1,9 +1,36 @@
-import { UserNav } from "../sidebar/user-nav";
-import { Layout, LayoutBody, LayoutHeader } from "../ui/layout";
+import { UserNav } from "../../sidebar/user-nav";
+import { Layout, LayoutBody, LayoutHeader } from "../../ui/layout";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import sample from "./data/sample";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 export default function Status() {
+  const role = useSelector((state: any) => state.auth.role);
+  const token = useSelector((state: any) => state.auth.token);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response: any = await axios.get(
+          `http://localhost:7000/api/v1/cargo/all?supplier=${id}&status=pending`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const resp = response.data.data;
+        console.log(resp);
+      } catch (error) {
+        console.error("Error fetching supplier data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <Layout className="md:pl-10">
       {/* ===== Top Heading ===== */}

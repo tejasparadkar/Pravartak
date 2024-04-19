@@ -1,7 +1,7 @@
 export default [
   {
     label: "Package 1",
-    status: "Completed",
+    status: "Delivered",
     shipped: "2024-04-01",
     delivery: "2024-04-05",
     recipient: "John Doe",
@@ -9,7 +9,7 @@ export default [
   },
   {
     label: "Package 2",
-    status: "Processing",
+    status: "Pending",
     shipped: "2024-03-25",
     delivery: "2024-03-30",
     recipient: "Jane Smith",

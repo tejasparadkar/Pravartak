@@ -23,9 +23,15 @@ const router = createBrowserRouter([
         }),
       },
       {
-        path: "status",
+        path: "customer-status",
         lazy: async () => ({
-          Component: (await import("./pages/dashboard/status/index")).default,
+          Component: (await import("./pages/dashboard/status/customer/index")).default,
+        }),
+      },
+      {
+        path: "supplier-status",
+        lazy: async () => ({
+          Component: (await import("./pages/dashboard/status/supplier/index")).default,
         }),
       },
       {

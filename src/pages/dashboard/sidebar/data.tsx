@@ -37,7 +37,7 @@ export const sidelinks: SideLink[] = [
     role: "customer",
     title: "Status",
     label: "",
-    href: "/dashboard/status",
+    href: "/dashboard/customer-status",
     icon: <LayersIcon />,
   },
   {
