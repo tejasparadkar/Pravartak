@@ -43,7 +43,15 @@ const CargoSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    receiverWallet:String,
+    receiverWallet: String,
+    isApprovedByOwner: {
+      type: Boolean,
+      default: false,
+    },
+    isApprovedBySupplier: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

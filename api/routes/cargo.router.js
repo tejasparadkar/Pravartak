@@ -7,6 +7,8 @@ const {
   getSingleCargo,
   updateCargo,
   customerDashboardAnalysis,
+  approvedBySupplier,
+  approvedByCustomer,
 } = require("../controllers/cargo.controller");
 
 // middlewares
@@ -21,6 +23,8 @@ router.get(
   getAllCargo
 );
 router.route("/:id").get(protect, getSingleCargo).put(protect, updateCargo);
+router.get("/:id/supplier/approved", approvedBySupplier);
+router.get("/:id/customer/approved", approvedByCustomer);
 router.route("/customer/:id/analysis").get(protect, customerDashboardAnalysis);
 // router.route("/supplier/:id/analysis").get(protect, customerDashboardAnalysis);
 // router.route("/employee/analysis").get(protect, customerDashboardAnalysis);
