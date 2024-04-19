@@ -180,3 +180,22 @@ exports.approvedByCustomer = asyncHandler(async (req, res, next) => {
   const updatedCargo = await cargo.save();
   res.status(200).json({ success: true, cargo: updatedCargo });
 });
+
+exports.getCargoData = asyncHandler(async (req, res, next) => {
+  // label: "Package 1",status: "Completed",shipped: "2024-04-01",delivery: "2024-04-05",recipient: "John Doe",supplier: "Supplier A"
+  const query =
+    req.user.role == "customer"
+      ? { owner: req.user._id }
+      : { supplier: req.user._id };
+  const data = await Cargo.find(query).populate("supplier owner");
+  const responseData = data.map((d) => ({
+    label: d.label,
+    status: d.status,
+    shipped: d.createdAt,
+    deivery: d.delivery,
+    pickup: d.pickup,
+    supplier: d.supplier.name,
+    customer: d.owner.name,
+  }));
+  res.status(200).json({ success: true, data: responseData });
+});
