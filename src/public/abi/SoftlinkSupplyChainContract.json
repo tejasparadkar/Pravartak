@@ -1,0 +1,529 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_label",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_weight",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_height",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_vol",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_len",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_wid",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_qty",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_p_type",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "_stacking",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "_cold_storage",
+        "type": "bool"
+      }
+    ],
+    "name": "addTenderDetails",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "_updated",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "batchId",
+        "type": "uint256"
+      }
+    ],
+    "name": "approveByReceiver",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "_s",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "batchId",
+        "type": "uint256"
+      }
+    ],
+    "name": "approveBySupplier",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTendersOfCutomer",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "receiver",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "supplier",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "batchId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "pickup",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "delivery",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "completedPayment",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tenderBudget",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "issuedAt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "expectedDate",
+            "type": "string"
+          },
+          {
+            "internalType": "enum SoftlinkSupplyChain.PackageState",
+            "name": "stage",
+            "type": "uint8"
+          },
+          {
+            "internalType": "string",
+            "name": "label",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "weight",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "height",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "vol",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "len",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "wid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "qty",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum SoftlinkSupplyChain.PckgType",
+            "name": "p_type",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "stacking",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "cold_storage",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct SoftlinkSupplyChain.PackagingTender[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      }
+    ],
+    "name": "getTendersOfReceiver",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "receiver",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "supplier",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "batchId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "pickup",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "delivery",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "completedPayment",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tenderBudget",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "issuedAt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "expectedDate",
+            "type": "string"
+          },
+          {
+            "internalType": "enum SoftlinkSupplyChain.PackageState",
+            "name": "stage",
+            "type": "uint8"
+          },
+          {
+            "internalType": "string",
+            "name": "label",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "weight",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "height",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "vol",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "len",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "wid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "qty",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum SoftlinkSupplyChain.PckgType",
+            "name": "p_type",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "stacking",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "cold_storage",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct SoftlinkSupplyChain.PackagingTender[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "supplier",
+        "type": "address"
+      }
+    ],
+    "name": "getTendersOfSupplier",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "receiver",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "supplier",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "batchId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "pickup",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "delivery",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "completedPayment",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tenderBudget",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "issuedAt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "expectedDate",
+            "type": "string"
+          },
+          {
+            "internalType": "enum SoftlinkSupplyChain.PackageState",
+            "name": "stage",
+            "type": "uint8"
+          },
+          {
+            "internalType": "string",
+            "name": "label",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "weight",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "height",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "vol",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "len",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "wid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "qty",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum SoftlinkSupplyChain.PckgType",
+            "name": "p_type",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "stacking",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "cold_storage",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct SoftlinkSupplyChain.PackagingTender[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_receiver",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "supplier",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_pickup",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_delivery",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_tenderBudget",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_expectedDate",
+        "type": "string"
+      }
+    ],
+    "name": "registerTender",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "_success",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]

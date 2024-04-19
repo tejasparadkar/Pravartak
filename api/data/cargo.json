@@ -1,0 +1,428 @@
+[
+    {
+        "owner": "5d7a514b5d2c12c7449be042",
+        "supplier": "5d7a514b5d2c12c7449be049",
+        "pickup": "New York, USA",
+        "delivery": "Los Angeles, USA",
+        "cargoType": "fragile",
+        "label": "Electronics",
+        "status": "not delivered",
+        "weight": 100,
+        "quantity": 10,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 10,
+            "width": 5,
+            "height": 8
+        },
+        "docsIPFS": "QmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5uG8JhMG",
+        "depositBudget": 5000,
+        "createdAt": "2023-01-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be042",
+        "supplier": "5d7a514b5d2c12c7449be050",
+        "pickup": "Lakeport, San Marino",
+        "delivery": "Woodland, Lithuania",
+        "cargoType": "non-fragile",
+        "label": "Small Appliances",
+        "weight": 149,
+        "status": "not delivered",
+        "quantity": 11,
+        "allow_stacking": false,
+        "dimensions": {
+            "length": 9,
+            "width": 8,
+            "height": 5
+        },
+        "docsIPFS": "JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5uG8",
+        "depositBudget": 5624,
+        "createdAt": "2023-02-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be042",
+        "supplier": "5d7a514b5d2c12c7449be049",
+        "pickup": "Kingston, Singapore",
+        "delivery": "Cleveland, Montserrat",
+        "cargoType": "fragile",
+        "label": "Electronics",
+        "status": "delivered",
+        "deliveredPayment": true,
+        "weight": 96,
+        "quantity": 8,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 12,
+            "width": 9,
+            "height": 7
+        },
+        "docsIPFS": "uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5",
+        "depositBudget": 3638,
+        "createdAt": "2023-02-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be043",
+        "supplier": "5d7a514b5d2c12c7449be051",
+        "pickup": "Princeton, Rwanda",
+        "delivery": "Tokyo, Gambia",
+        "cargoType": "cold storage",
+        "label": "Frozen Foods",
+        "weight": 58,
+        "quantity": 18,
+        "status": "delivered",
+        "deliveredPayment": true,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 7,
+            "width": 7,
+            "height": 12
+        },
+        "docsIPFS": "o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5uG8JhMGQmXH3",
+        "depositBudget": 2432,
+        "createdAt": "2023-01-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be044",
+        "supplier": "5d7a514b5d2c12c7449be051",
+        "pickup": "San Francisco, Tonga",
+        "delivery": "Denver, Thailand",
+        "cargoType": "non-fragile",
+        "label": "Books",
+        "status": "not delivered",
+        "weight": 61,
+        "quantity": 5,
+        "allow_stacking": false,
+        "dimensions": {
+            "length": 11,
+            "width": 4,
+            "height": 9
+        },
+        "docsIPFS": "sXg5uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQ",
+        "depositBudget": 1245,
+        "createdAt": "2023-03-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be044",
+        "supplier": "5d7a514b5d2c12c7449be050",
+        "pickup": "Los Angeles, Malta",
+        "delivery": "Sydney, Georgia",
+        "cargoType": "non-fragile",
+        "label": "Home Decor",
+        "status": "not delivered",
+        "weight": 85,
+        "quantity": 12,
+        "allow_stacking": false,
+        "dimensions": {
+            "length": 6,
+            "width": 10,
+            "height": 9
+        },
+        "docsIPFS": "HQsXg5uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8V",
+        "depositBudget": 4216,
+        "createdAt": "2023-02-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be043",
+        "supplier": "5d7a514b5d2c12c7449be051",
+        "pickup": "Chicago, Sierra Leone",
+        "delivery": "Toronto, Ecuador",
+        "cargoType": "fragile",
+        "label": "Glassware",
+        "weight": 159,
+        "quantity": 16,
+        "status": "not delivered",
+        "deliveredPayment": true,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 6,
+            "width": 5,
+            "height": 10
+        },
+        "docsIPFS": "p7L8VHQsXg5uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKj",
+        "depositBudget": 6699,
+        "createdAt": "2023-01-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be043",
+        "supplier": "5d7a514b5d2c12c7449be051",
+        "pickup": "Seattle, Iran",
+        "delivery": "Paris, Benin",
+        "cargoType": "cold storage",
+        "label": "Seafood",
+        "weight": 79,
+        "status": "delivered",
+        "deliveredPayment": true,
+        "quantity": 7,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 5,
+            "width": 4,
+            "height": 11
+        },
+        "docsIPFS": "fuKjp7L8VHQsXg5uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLh",
+        "depositBudget": 5698,
+        "createdAt": "2023-01-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be046",
+        "supplier": "5d7a514b5d2c12c7449be053",
+        "pickup": "Houston, Cuba",
+        "delivery": "Miami, Vatican City",
+        "cargoType": "fragile",
+        "label": "Pottery",
+        "status": "not delivered",
+        "weight": 164,
+        "quantity": 14,
+        "allow_stacking": false,
+        "dimensions": {
+            "length": 11,
+            "width": 7,
+            "height": 11
+        },
+        "docsIPFS": "8uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsX",
+        "depositBudget": 8787,
+        "createdAt": "2023-02-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be045",
+        "supplier": "5d7a514b5d2c12c7449be054",
+        "pickup": "Boston, Finland",
+        "delivery": "London, Costa Rica",
+        "cargoType": "non-fragile",
+        "label": "Clothing",
+        "status": "not delivered",
+        "weight": 137,
+        "quantity": 19,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 14,
+            "width": 6,
+            "height": 12
+        },
+        "docsIPFS": "g5uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQs",
+        "depositBudget": 9243,
+        "createdAt": "2023-03-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be042",
+        "supplier": "5d7a514b5d2c12c7449be054",
+        "pickup": "Philadelphia, Colombia",
+        "delivery": "Berlin, Peru",
+        "cargoType": "cold storage",
+        "label": "Dairy Products",
+        "status": "delivered",
+        "deliveredPayment": true,
+        "weight": 71,
+        "quantity": 3,
+        "allow_stacking": false,
+        "dimensions": {
+            "length": 14,
+            "width": 8,
+            "height": 6
+        },
+        "docsIPFS": "Xg5uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQs",
+        "depositBudget": 3555,
+        "createdAt": "2023-02-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be045",
+        "supplier": "5d7a514b5d2c12c7449be052",
+        "pickup": "Miami, USA",
+        "delivery": "Tokyo, Japan",
+        "cargoType": "fragile",
+        "label": "Glassware",
+        "status": "not delivered",
+        "weight": 75,
+        "quantity": 8,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 7,
+            "width": 6,
+            "height": 9
+        },
+        "docsIPFS": "Kt6HCLhfuKjp7L8VHQsXg5uG8JhMGQmXH3o4JrRi1R9E7Z",
+        "depositBudget": 4200,
+        "createdAt": "2023-03-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be045",
+        "supplier": "5d7a514b5d2c12c7449be053",
+        "pickup": "London, UK",
+        "delivery": "Sydney, Australia",
+        "status": "delivered",
+        "cargoType": "non-fragile",
+        "label": "Books",
+        "weight": 110,
+        "quantity": 15,
+        "allow_stacking": false,
+        "dimensions": {
+            "length": 8,
+            "width": 5,
+            "height": 7
+        },
+        "docsIPFS": "HQsXg5uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8V",
+        "depositBudget": 6300,
+        "createdAt": "2023-01-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be045",
+        "supplier": "5d7a514b5d2c12c7449be053",
+        "pickup": "Paris, France",
+        "delivery": "Rio de Janeiro, Brazil",
+        "cargoType": "cold storage",
+        "label": "Frozen Foods",
+        "status": "not delivered",
+        "weight": 90,
+        "quantity": 12,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 6,
+            "width": 10,
+            "height": 8
+        },
+        "docsIPFS": "HCLhfuKjp7L8VHQsXg5uG8JhMGQmXH3o4JrRi1R9E7ZKt6",
+        "depositBudget": 5300,
+        "createdAt": "2023-01-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be046",
+        "supplier": "5d7a514b5d2c12c7449be054",
+        "pickup": "New Delhi, India",
+        "delivery": "Shanghai, China",
+        "cargoType": "fragile",
+        "status": "delivered",
+        "label": "Electronics",
+        "weight": 88,
+        "quantity": 10,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 9,
+            "width": 4,
+            "height": 6
+        },
+        "docsIPFS": "o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5uG8JhMGQmXH3",
+        "depositBudget": 4700,
+        "createdAt": "2023-03-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be047",
+        "supplier": "5d7a514b5d2c12c7449be053",
+        "pickup": "Berlin, Germany",
+        "delivery": "Moscow, Russia",
+        "status": "not delivered",
+        "cargoType": "non-fragile",
+        "label": "Home Goods",
+        "weight": 120,
+        "quantity": 14,
+        "allow_stacking": false,
+        "dimensions": {
+            "length": 10,
+            "width": 8,
+            "height": 5
+        },
+        "docsIPFS": "JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5uG8",
+        "depositBudget": 6700,
+        "createdAt": "2023-02-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be047",
+        "supplier": "5d7a514b5d2c12c7449be054",
+        "pickup": "Sydney, Australia",
+        "delivery": "New York City, USA",
+        "status": "delivered",
+        "cargoType": "fragile",
+        "label": "Artwork",
+        "weight": 150,
+        "quantity": 6,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 8,
+            "width": 7,
+            "height": 12
+        },
+        "docsIPFS": "G8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5u",
+        "depositBudget": 5800,
+        "createdAt": "2023-02-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be042",
+        "supplier": "5d7a514b5d2c12c7449be053",
+        "pickup": "Tokyo, Japan",
+        "delivery": "Singapore",
+        "cargoType": "cold storage",
+        "label": "Seafood",
+        "status": "delivered",
+        "deliveredPayment": true,
+        "weight": 85,
+        "quantity": 11,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 9,
+            "width": 6,
+            "height": 10
+        },
+        "docsIPFS": "8VHQsXg5uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L",
+        "depositBudget": 5300,
+        "createdAt": "2023-02-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be042",
+        "supplier": "5d7a514b5d2c12c7449be052",
+        "pickup": "Los Angeles, USA",
+        "delivery": "San Francisco, USA",
+        "cargoType": "fragile",
+        "status": "delivered",
+        "label": "Glassware",
+        "weight": 70,
+        "quantity": 9,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 6,
+            "width": 5,
+            "height": 8
+        },
+        "docsIPFS": "uG8JhMGQmXH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5",
+        "depositBudget": 4100,
+        "createdAt": "2023-01-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be043",
+        "supplier": "5d7a514b5d2c12c7449be051",
+        "pickup": "Rio de Janeiro, Brazil",
+        "delivery": "Cape Town, South Africa",
+        "cargoType": "non-fragile",
+        "status": "delivered",
+        "label": "Clothing",
+        "weight": 110,
+        "quantity": 17,
+        "allow_stacking": false,
+        "dimensions": {
+            "length": 11,
+            "width": 7,
+            "height": 9
+        },
+        "docsIPFS": "XH3o4JrRi1R9E7ZKt6HCLhfuKjp7L8VHQsXg5uG8JhMGQm",
+        "depositBudget": 6900,
+        "createdAt": "2023-01-05T00:00:00Z"
+    },
+    {
+        "owner": "5d7a514b5d2c12c7449be043",
+        "supplier": "5d7a514b5d2c12c7449be054",
+        "status": "delivered",
+        "pickup": "Hong Kong",
+        "delivery": "Dubai, UAE",
+        "cargoType": "cold storage",
+        "label": "Frozen Foods",
+        "weight": 95,
+        "quantity": 13,
+        "allow_stacking": true,
+        "dimensions": {
+            "length": 7,
+            "width": 5,
+            "height": 11
+        },
+        "docsIPFS": "Kt6HCLhfuKjp7L8VHQsXg5uG8JhMGQmXH3o4JrRi1R9E7Z",
+        "depositBudget": 5100,
+        "createdAt": "2023-01-05T00:00:00Z"
+    }
+]
