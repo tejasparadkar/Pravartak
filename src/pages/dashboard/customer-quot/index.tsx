@@ -14,17 +14,36 @@ import {
 } from "wagmi/actions";
 import { config } from "../../../wagmi";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { Label } from "@/components/ui/label";
+
 export default function CustomerQuot() {
   const id = useSelector((state: any) => state.auth.id);
   const token = useSelector((state: any) => state.auth.token);
   const [res, setRes] = useState([]);
 
-  const navigate = useNavigate();
-
   const fetchData = async () => {
     try {
       const response: any = await axios.get(
-        `http://localhost:7000/api/v1/cargo/all?owner=5d7a514b5d2c12c7449be042&isApprovedByOwner=false`,
+        `http://localhost:7000/api/v1/cargo/all?owner=${id}&isApprovedByOwner=false`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,16 +51,29 @@ export default function CustomerQuot() {
         }
       );
       const resp = response.data.data;
+      console.log(resp);
       setRes(resp);
     } catch (error) {
       console.error("Error fetching supplier data:", error);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const handleUpdate = async (selectedSupplier) => {
+    try {
+      const response: any = await axios.put(
+        `http://localhost:7000/api/v1/cargo/${res[0]._id}`,
+        {
+          isApprovedBySupplier: false,
+          supplier: selectedSupplier._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
+<<<<<<< HEAD
   
   async function createPkg(
     _receiver: Address,
@@ -150,6 +182,34 @@ export default function CustomerQuot() {
 
 
   };
+=======
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching supplier data:", error);
+    }
+  };
+
+  const [supplierData, setSupplierData] = useState([]);
+  const [selectedSupplier, setSelectedSupplier] = useState("");
+
+  useEffect(() => {
+    const fetchSupplier = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:7000/api/v1/auth/supplier"
+        );
+        setSupplierData(response.data.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching supplier data:", error);
+      }
+    };
+    fetchData();
+
+    fetchSupplier();
+  }, []);
+  const handleApprove = () => {};
+>>>>>>> 3095b8d55c934957ccb54372b6088fbbf34a4b31
 
   return (
     <>
@@ -175,12 +235,51 @@ export default function CustomerQuot() {
                     <Button onClick={() => handleApprove(item)}>
                       Approve
                     </Button>
-                    <Button
-                      variant={"destructive"}
-                      onClick={() => handleReject(item._id)}
-                    >
-                      Reject
-                    </Button>
+
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="outline">Reject</Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[425px] font-Geist">
+                        <DialogHeader>
+                          <DialogTitle>Reselect Supplier</DialogTitle>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                          <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="name" className="text-right">
+                              Name
+                            </Label>
+                            <Select onValueChange={setSelectedSupplier}>
+                              <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="Select a fruit" />
+                              </SelectTrigger>
+                              <SelectContent className="font-Geist">
+                                {supplierData &&
+                                  supplierData?.map((supplier) => (
+                                    <SelectItem
+                                      key={supplier._id}
+                                      value={supplier.name}
+                                    >
+                                      {supplier.name}
+                                    </SelectItem>
+                                  ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="flex justify-center">
+                            <Button
+                              className="w-1/2"
+                              onClick={() => {
+                                handleUpdate(selectedSupplier);
+                                console.log(selectedSupplier);
+                              }}
+                            >
+                              Submit
+                            </Button>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 ))}
             </div>
