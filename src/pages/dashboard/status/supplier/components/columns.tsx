@@ -92,24 +92,9 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "supplier",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Supplier" />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className="flex space-x-2">
-          <span className="max-w-30 truncate sm:max-w-72 md:max-w-[31rem]">
-            {row.getValue("supplier")}
-          </span>
-        </div>
-      );
-    },
-  },
-  {
     accessorKey: "quotation",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Quotation" />
+      <DataTableColumnHeader column={column} title="" />
     ),
     cell: ({ row }) => {
       return (

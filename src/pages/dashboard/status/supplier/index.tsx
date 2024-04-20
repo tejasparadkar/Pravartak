@@ -3,7 +3,34 @@ import { Layout, LayoutBody, LayoutHeader } from "../../ui/layout";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import sample from "./data/sample";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import abi from "../../../../public/abi/SoftlinkSupplyChainContract.json";
+import { Address, StringToBytesOpts, parseEther } from "viem";
+import { readContract } from "viem/actions";
+import { config } from "./../../../../wagmi";
+import { useAccount } from "wagmi";
+
 export default function Status() {
+  const role = useSelector((state: any) => state.auth.role);
+  const token = useSelector((state: any) => state.auth.token);
+  const [data, setData] = useState([]);
+  const account = useAccount();
+
+  function getTendersOfSupplier(supplier: Address) {
+    return readContract(config, {
+      abi,
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      functionName: "getTendersOfSupplier",
+      args: [supplier],
+    });
+  }
+
+  useEffect(()=>{
+    console.log(account.address);
+    getTendersOfSupplier(account.address);
+  },[])
+
   return (
     <Layout className="md:pl-10">
       {/* ===== Top Heading ===== */}

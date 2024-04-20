@@ -47,11 +47,4 @@ export const sidelinks: SideLink[] = [
     href: "/dashboard/supplier",
     icon: <IconHexagonNumber1 size={18} />,
   },
-  // {
-  //   role: "employer",
-  //   title: "View Application",
-  //   label: "",
-  //   href: "/dashboard/view-application",
-  //   icon: <IconHexagonNumber2 size={18} />,
-  // },
 ];

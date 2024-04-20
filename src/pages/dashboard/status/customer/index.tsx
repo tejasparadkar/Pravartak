@@ -3,18 +3,18 @@ import { Layout, LayoutBody, LayoutHeader } from "../../ui/layout";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import sample from "./data/sample";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 export default function Status() {
   const role = useSelector((state: any) => state.auth.role);
   const token = useSelector((state: any) => state.auth.token);
-
+  const [data,setData] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
         const response: any = await axios.get(
-          `http://localhost:7000/api/v1/cargo/all?supplier=${id}&status=pending`,
+          `http://localhost:7000/api/v1/cargo/data`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -22,7 +22,15 @@ export default function Status() {
           }
         );
         const resp = response.data.data;
-        console.log(resp);
+        const res = resp.map((item, index) => ({
+          label: item.label,
+          status: item.status,
+          shipped: item.shipped.slice(0, 10),
+          delivery: item.deivery,
+          recipient: item.pickup,
+          supplier: item.supplier,
+        }));
+        setData(res);
       } catch (error) {
         console.error("Error fetching supplier data:", error);
       }
@@ -53,7 +61,7 @@ export default function Status() {
         </div>
         <div className="grid grid-cols-2 py-5">
           <div className="col-span-2 -mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-            <DataTable data={sample} columns={columns} />
+            <DataTable data={data} columns={columns} />
           </div>
         </div>
       </LayoutBody>

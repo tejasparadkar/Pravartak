@@ -37,35 +37,35 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const statusValue = row.getValue("status");
 
-      if (statusValue === "Delivered") {
-        return (
-          <div className="flex space-x-2">
-            <div className="bg-green-100 px-2 py-1 rounded-md flex justify-center items-center space-x-4">
-              <div className="bg-green-500 w-3 h-3 rounded-xl"></div>
-              <span className="max-w-30 truncate sm:max-w-72 md:max-w-[31rem]">
-                {statusValue}
-              </span>
-            </div>
-          </div>
-        );
-      } else if (statusValue === "Pending") {
+      if (statusValue === "pending") {
         return (
           <div className="flex space-x-2">
             <div className="bg-yellow-100 px-2 py-1 rounded-md flex justify-center items-center space-x-4">
               <div className="bg-yellow-500 w-3 h-3 rounded-xl"></div>
               <span className="max-w-30 truncate sm:max-w-72 md:max-w-[31rem]">
-                {statusValue}
+                Pending
               </span>
             </div>
           </div>
         );
-      } else if (statusValue === "Not Delivered") {
+      } else if (statusValue === "delivered") {
         return (
           <div className="flex space-x-2">
-            <div className="bg-purple-100 px-2 py-1 rounded-md flex justify-center items-center space-x-4">
-              <div className="bg-purple-500 w-3 h-3 rounded-xl"></div>
+            <div className="bg-green-100 px-2 py-1 rounded-md flex justify-center items-center space-x-4">
+              <div className="bg-green-500 w-3 h-3 rounded-xl"></div>
               <span className="max-w-30 truncate sm:max-w-72 md:max-w-[31rem]">
-                {statusValue}
+                Delivered
+              </span>
+            </div>
+          </div>
+        );
+      } else if (statusValue === "not delivered") {
+        return (
+          <div className="flex space-x-2">
+            <div className="bg-red-100 px-2 py-1 rounded-md flex justify-center items-center space-x-4">
+              <div className="bg-red-500 w-3 h-3 rounded-xl"></div>
+              <span className="max-w-30 truncate sm:max-w-72 md:max-w-[31rem]">
+                Not Delivered
               </span>
             </div>
           </div>
@@ -107,15 +107,15 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "quotation",
+    accessorKey: "shipped",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Quotation" />
+      <DataTableColumnHeader column={column} title="Shipped" />
     ),
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
           <span className="max-w-30 truncate sm:max-w-72 md:max-w-[31rem]">
-            {row.getValue("quotation")}
+            {row.getValue("shipped")}
           </span>
         </div>
       );

@@ -25,13 +25,15 @@ const router = createBrowserRouter([
       {
         path: "customer-status",
         lazy: async () => ({
-          Component: (await import("./pages/dashboard/status/customer/index")).default,
+          Component: (await import("./pages/dashboard/status/customer/index"))
+            .default,
         }),
       },
       {
         path: "supplier-status",
         lazy: async () => ({
-          Component: (await import("./pages/dashboard/status/supplier/index")).default,
+          Component: (await import("./pages/dashboard/status/supplier/index"))
+            .default,
         }),
       },
       {
@@ -58,16 +60,10 @@ const router = createBrowserRouter([
       {
         path: "customer-quot",
         lazy: async () => ({
-          Component: (await import("./pages/dashboard/customer-quot/index")).default,
+          Component: (await import("./pages/dashboard/customer-quot/index"))
+            .default,
         }),
       },
-
-      // {
-      //   path: "profiles",
-      //   lazy: async () => ({
-      //     Component: (await import("./pages/dashboard/profile/index")).default,
-      //   }),
-      // },
       // {
       //   path: "view-application",
       //   lazy: async () => ({
