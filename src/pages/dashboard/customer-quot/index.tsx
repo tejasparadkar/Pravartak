@@ -39,7 +39,7 @@ export default function CustomerQuot() {
   const id = useSelector((state: any) => state.auth.id);
   const token = useSelector((state: any) => state.auth.token);
   const [res, setRes] = useState([]);
-
+  const [selectedSupplier,setSelectedSupplier] = useState()
   const fetchData = async () => {
     try {
       const response: any = await axios.get(
@@ -58,6 +58,10 @@ export default function CustomerQuot() {
     }
   };
 
+  useEffect(()=>{
+    fetchData()
+  },[])
+
   const handleUpdate = async (selectedSupplier) => {
     try {
       const response: any = await axios.put(
@@ -72,50 +76,55 @@ export default function CustomerQuot() {
           },
         }
       );
-      const { data: signMessageData, error, isLoading, signMessage, variables } = useSignMessage()
-      const recoveredAddress = useRef<string>()
 
-      useEffect(()=>{
-        if (variables?.message && signMessageData) {
-          const recoveredAddress = await recoverMessageAddress({
-            message: variables?.message,
-            signature: signMessageData,
-          });
-          setRecoveredAddress(recoveredAddress)
-        }
-      },[signMessageData, variables?.message])
+    }catch(e){
+
+    }
+  }
+    //   const { data: signMessageData, error, isLoading, signMessage, variables } = useSignMessage()
+    //   const recoveredAddress = useRef<string>()
+
+    //   useEffect(()=>{
+    //     if (variables?.message && signMessageData) {
+    //       const recoveredAddress = await recoverMessageAddress({
+    //         message: variables?.message,
+    //         signature: signMessageData,
+    //       });
+    //       setRecoveredAddress(recoveredAddress)
+    //     }
+    //   },[signMessageData, variables?.message])
 
 
-      async function signContract(
-         _receiver: Address,
-        supplier: Address,
-        _pickup: string,
-    _delivery: string,
-    _tenderBudget: string,
-    _expectedDate: string,){
+    //   async function signContract(
+    //      _receiver: Address,
+    //     supplier: Address,
+    //     _pickup: string,
+    // _delivery: string,
+    // _tenderBudget: string,
+    // _expectedDate: string,){
 
-      const message  = `
-      Contract Agreement:
+    //   const message  = `
+    //   Contract Agreement:
 
-      Parties:
-      - Supplier: ${supplier}
-      - Receiver: ${_receiver}
+    //   Parties:
+    //   - Supplier: ${supplier}
+    //   - Receiver: ${_receiver}
       
-      Details:
-      - Pickup Location: ${_pickup}
-      - Delivery Location: ${_delivery}
-      - Tender Budget: ${_tenderBudget}
-      - Expected Date: ${_expectedDate}
+    //   Details:
+    //   - Pickup Location: ${_pickup}
+    //   - Delivery Location: ${_delivery}
+    //   - Tender Budget: ${_tenderBudget}
+    //   - Expected Date: ${_expectedDate}
       
-      Terms and Conditions:
-      1. The Supplier agrees to provide the specified goods or services to the Receiver in accordance with the details outlined above.
-      2. The Receiver agrees to accept delivery of the goods or services at the designated delivery location.
-      3. The Tender Budget represents the agreed-upon compensation for the goods or services provided by the Supplier.
-      4. The Expected Date indicates the target date by which the goods or services are expected to be delivered to the Receiver.
-      5. Any changes to the agreed-upon terms must be mutually agreed upon and documented in writing by both parties.
-      `;
-        signMessage({ message })
-      }
+    //   Terms and Conditions:
+    //   1. The Supplier agrees to provide the specified goods or services to the Receiver in accordance with the details outlined above.
+    //   2. The Receiver agrees to accept delivery of the goods or services at the designated delivery location.
+    //   3. The Tender Budget represents the agreed-upon compensation for the goods or services provided by the Supplier.
+    //   4. The Expected Date indicates the target date by which the goods or services are expected to be delivered to the Receiver.
+    //   5. Any changes to the agreed-upon terms must be mutually agreed upon and documented in writing by both parties.
+    //   `;
+    //     signMessage({ message })
+    //   }
   
   async function createPkg(
     _receiver: Address,
