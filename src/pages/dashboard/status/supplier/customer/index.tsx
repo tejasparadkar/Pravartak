@@ -1,5 +1,5 @@
-import { UserNav } from "../sidebar/user-nav";
-import { Layout, LayoutBody, LayoutHeader } from "../ui/layout";
+import { UserNav } from "../../sidebar/user-nav";
+import { Layout, LayoutBody, LayoutHeader } from "../../ui/layout";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import sample from "./data/sample";

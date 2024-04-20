@@ -260,6 +260,17 @@ console.log(
     
 }}>Get Receiver Tenders</button>
 
+<button onClick={async ev => {
+    const tenders = await approveBySupplier(0);
+    console.log(tenders);
+    
+}}>Supplier Approval</button>
+
+<button onClick={async ev => {
+    const tenders = await approveByReceiver(0);
+    console.log(tenders);
+    
+}}> Receiver Approval</button>
       </div>
     </>
   );
