@@ -10,49 +10,61 @@ import { UserNav } from "../sidebar/user-nav";
 
 import { Layout, LayoutBody, LayoutHeader } from "../ui/layout";
 
-import { Overview } from "./components/overview";
 import { useSelector } from "react-redux";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { useEffect, useState } from "react";
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
-const data = [
-  { name: "Jan", total: 0 },
-  { name: "Feb", total: 0 },
-  { name: "Mar", total: 0 },
-  { name: "Apr", total: 0 },
-  { name: "May", total: 0 },
-  { name: "Jun", total: 0 },
-  { name: "Jul", total: 0 },
-  { name: "Aug", total: 0 },
-  { name: "Sep", total: 0 },
-  { name: "Oct", total: 0 },
-  { name: "Nov", total: 0 },
-  { name: "Dec", total: 0 },
-];
+const SupplierDashboard = () => {
+  const id = useSelector((state: any) => state.auth.id);
+  const token = useSelector((state: any) => state.auth.token);
+  const [sample, setSample] = useState([]);
+  const data = [
+    { name: "January", total: 0 },
+    { name: "February", total: 0 },
+    { name: "March", total: 0 },
+    { name: "April", total: 0 },
+    { name: "May", total: 0 },
+    { name: "June", total: 0 },
+    { name: "July", total: 0 },
+    { name: "August", total: 0 },
+    { name: "September", total: 0 },
+    { name: "October", total: 0 },
+    { name: "November", total: 0 },
+    { name: "December", total: 0 },
+  ];
 
-export default function SupplierDashboard() {
-  // const id = useSelector((state: any) => state.auth.id);
-  // const token = useSelector((state: any) => state.auth.token);
-  // const [data,setData] = useState();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response: any = await axios.get(
+          `http://localhost:7000/api/v1/cargo/customer/${id}/analysis`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const res = response.data.data.statsData.bar;
+        console.log(res);
+        const mergedData = data.map((item) => {
+          const foundMonth = res.find(
+            (monthData) => monthData.month === item.name
+          );
+          if (foundMonth) {
+            return { ...item, total: foundMonth.turnover };
+          }
+          return item;
+        });
 
-  // try {
-  //   const response: any = await axios.get(
-  //     `http://localhost:7000/api/v1/cargo/customer/${id}/analysis`,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   const res = response.data.data.statsData.bar;
+        setSample(mergedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  //   const mergedData = data.map((item) => {
-  //     const foundMonth = res.find((monthData) => monthData.month === item.name);
-  //     if (foundMonth) {
-  //       return { ...item, total: foundMonth.turnover };
-  //     }
-  //     return item;
-  //   });
-  // } catch {}
+    fetchData();
+  }, [id, token]);
 
   const account = useAccount();
   const { connectors, connect, status, error } = useConnect();
@@ -177,14 +189,31 @@ export default function SupplierDashboard() {
               <CardHeader>
                 <CardTitle>Overview</CardTitle>
               </CardHeader>
-              <CardContent className="pl-2">{/* <Overview /> */}</CardContent>
-            </Card>
-            <Card className="col-span-1 lg:col-span-3">
-              <CardHeader>
-                <CardTitle>Recent Applications</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {/* {stats && <RecentSales data={stats} />} */}
+              <CardContent className="pl-2">
+                <ResponsiveContainer width="100%" height={350}>
+                  <BarChart data={sample}>
+                    <XAxis
+                      dataKey="name"
+                      stroke="#888888"
+                      fontSize={12}
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <YAxis
+                      stroke="#888888"
+                      fontSize={12}
+                      tickLine={false}
+                      axisLine={false}
+                      tickFormatter={(value) => `${value}`}
+                    />
+                    <Bar
+                      dataKey="total"
+                      fill="currentColor"
+                      radius={[4, 4, 0, 0]}
+                      className="fill-primary"
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
               </CardContent>
             </Card>
           </div>
@@ -192,4 +221,6 @@ export default function SupplierDashboard() {
       </Layout>
     </>
   );
-}
+};
+
+export default SupplierDashboard;
