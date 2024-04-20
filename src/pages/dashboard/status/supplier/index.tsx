@@ -27,9 +27,9 @@ export default function Status() {
   }
 
   useEffect(()=>{
-    console.log(account.address);
+    console.(account.address);
     getTendersOfSupplier(account.address).then(console.log);
-    
+  
   },[])
 
   

@@ -55,7 +55,7 @@ export const sidelinks: SideLink[] = [
     role: "lp",
     title: "Manage Request",
     label: "",
-    href: "/dashboard/supplier-resuest",
+    href: "/dashboard/supplier-request",
     icon: <IconApiApp />,
   },
 ];
