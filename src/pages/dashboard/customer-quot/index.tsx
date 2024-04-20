@@ -80,14 +80,14 @@ export default function CustomerQuot() {
   };
 
   useEffect(() => {
-    fetchData()
-  }, [])
-  const handleUpdate = async (selectedSupplier) => {
+    fetchData();
+  }, []);
+  const handleUpdate = async (selectedSupplier, id) => {
     console.log("here");
     console.log(selectedSupplier);
     try {
       const response: any = await axios.put(
-        `http://localhost:7000/api/v1/cargo/${res[4]._id}`,
+        `http://localhost:7000/api/v1/cargo/${id}`,
         {
           isApprovedBySupplier: false,
           supplier: selectedSupplier._id,
@@ -155,8 +155,6 @@ export default function CustomerQuot() {
         {
           isApprovedBySupplier: true,
           isApprovedByOwner: true,
-
-          // supplier: selectedSupplier._id,
         },
         {
           headers: {
@@ -173,7 +171,6 @@ export default function CustomerQuot() {
       setTimeout(() => {
         navigate("/dashboard");
       }, 1000);
-
     } catch (error) {
       console.error("Error fetching supplier data:", error);
     }
@@ -196,8 +193,6 @@ export default function CustomerQuot() {
     _stacking: boolean,
     _cold_storage: boolean
   ) {
-
-
     const res = await writeContract(config, {
       abi,
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
@@ -230,7 +225,7 @@ export default function CustomerQuot() {
       _cold_storage
     );
     // }, 3000);
-    handleApproval()
+    handleApproval();
   }
 
   async function addPkgDetails(
@@ -266,7 +261,6 @@ export default function CustomerQuot() {
   }
 
   const handleApprove = async (item: any) => {
-
     console.log(item.supplier, item.receiverWallet);
 
     const res = createPkg(
@@ -288,7 +282,6 @@ export default function CustomerQuot() {
       false
     );
     console.log(await res);
-
 
     // signContract(
     //   item.receiverWallet,
@@ -357,7 +350,7 @@ export default function CustomerQuot() {
                             <Button
                               className="w-1/2"
                               onClick={() => {
-                                handleUpdate(selectedSupplier);
+                                handleUpdate(selectedSupplier, item._id);
                               }}
                             >
                               Submit
