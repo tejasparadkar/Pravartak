@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "@/components/ui/use-toast";
 
 export default function Supplier() {
   const [showDetails, setShowDetails] = useState(false);
@@ -56,7 +57,6 @@ export default function Supplier() {
   };
 
   const handleSubmit = async () => {
-    console.log(res[0]._id);
     try {
       const response: any = await axios.put(
         `http://localhost:7000/api/v1/cargo/${res[0]._id}`,
@@ -70,8 +70,12 @@ export default function Supplier() {
           },
         }
       );
-
-      console.log(response);
+      setRes((prevRes) => prevRes.slice(1));
+      handleClickDetails();
+      toast({
+        title: "Budget Updated",
+        className: "font-Geist bg-yellow-500 text-white rounded-xl",
+      });
     } catch (error) {
       console.error("Error fetching supplier data:", error);
     }

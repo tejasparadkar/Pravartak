@@ -25,11 +25,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router} />
-        <Toaster />
-      </PersistGate>
-    </Provider>
+          <PersistGate loading={null} persistor={persistor}>
+            <RouterProvider router={router} />
+            <Toaster />ś
+          </PersistGate>
+        </Provider>
       </QueryClientProvider>
     </WagmiProvider>
   </React.StrictMode>
