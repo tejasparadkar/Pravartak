@@ -107,7 +107,7 @@ const SupplierDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex space-x-2 p-2 items-center">
-                  {account.address === null ? (
+                  {!account.address ? (
                     <>
                       <div className="w-5 h-5 bg-red-600 rounded-2xl"></div>
                       <p
