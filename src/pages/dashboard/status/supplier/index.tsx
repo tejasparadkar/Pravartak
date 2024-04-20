@@ -27,17 +27,9 @@ export default function Status() {
     });
   }
 
-<<<<<<< HEAD
   useEffect(() => {
     console.log(account.address);
     console.log();
-=======
-  useEffect(()=>{
-    console.(account.address);
-    getTendersOfSupplier(account.address).then(console.log);
-  
-  },[])
->>>>>>> d4101381bb2df4ff1e9b5725329826bc0e216f82
 
 
     getTendersOfSupplier(/*account.address*/"0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC").then(function (it) {
