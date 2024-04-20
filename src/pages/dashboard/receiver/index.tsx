@@ -7,6 +7,8 @@ import {
 } from "../../../components/ui/card";
 
 import { UserNav } from "../sidebar/user-nav";
+import abi from "../../../public/abi/SoftlinkSupplyChainContract.json";
+import { config } from "../../../wagmi";
 
 import { Layout, LayoutBody, LayoutHeader } from "../ui/layout";
 
@@ -15,7 +17,8 @@ import { useSelector } from "react-redux";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { Button } from "../ui/button";
 import { CheckIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
+import {readContract, writeContract} from 'wagmi/actions'
 
 const data = [
   { name: "Jan", total: 0 },
@@ -41,6 +44,7 @@ export default function ReceiverDashboard() {
 
   const handleReceived = () => {
     setReceived(!received);
+    approveByReceiver(account.address);
   };
 
   const handleConnect = () => {
@@ -48,20 +52,7 @@ export default function ReceiverDashboard() {
     window.location.reload();
   };
 
-import { DataTable } from "./components/data-table";
-import { columns } from "./components/columns";
-import sample from "./data/sample";
-import { useAccount,readContract } from "wagmi";
-import { writeContract } from "wagmi/actions";
-import { config } from "./../../../../wagmi";
 
-import { useEffect, useState } from "react";
-
-import abi from "../../../public/abi/SoftlinkSupplyChainContract.json";
-
-export default function Status() {
-
-  const account = useAccount();
 
   function getTendersOfReceiver(supplier: string) {
     return readContract(config, {
