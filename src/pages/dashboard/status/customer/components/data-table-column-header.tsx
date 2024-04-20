@@ -1,8 +1,8 @@
 import { Column } from "@tanstack/react-table";
 
-import { Button } from "../../ui/button";
+import { Button } from "../../../ui/button";
 
-import { DropdownMenu, DropdownMenuTrigger } from "../../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger } from "../../../ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
 interface DataTableColumnHeaderProps<TData, TValue>
