@@ -130,7 +130,7 @@ const Receiver: React.FC<ReceiverFormProps> = ({
                           </FormControl>
                           <SelectContent className="font-Geist">
                             {supplierData && supplierData?.map((supplier) => (
-                              <SelectItem key={supplier._id} value={supplier.name}>
+                              <SelectItem key={supplier._id} value={supplier._id}>
                                 {supplier.name}
                               </SelectItem>
                             ))}

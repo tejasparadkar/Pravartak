@@ -72,6 +72,7 @@ export default function Index() {
       pickup: receiverDetails.pickUp,
       delivery: receiverDetails.drop,
       receiverWallet: receiverDetails.wallet,
+      supplier: receiverDetails.supplier,
       dimensions: {
         length: details.length,
         width: details.width,
@@ -79,6 +80,7 @@ export default function Index() {
       },
     };
     try {
+      console.log(formData);
       const response: any = await axios.post(
         "http://localhost:7000/api/v1/cargo",
         formData,
