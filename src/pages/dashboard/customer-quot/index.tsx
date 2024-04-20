@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { useAccount, useConnect, useDisconnect, useReadContract } from "wagmi";
 import abi from "../../../public/abi/SoftlinkSupplyChainContract.json";
-import { Address, StringToBytesOpts, parseEther } from "viem";
+import { Address, StringToBytesOpts, parseEther, recoverMessageAddress } from "viem";
 import {
   readContract,
   simulateContract,
@@ -72,8 +72,50 @@ export default function CustomerQuot() {
           },
         }
       );
+      const { data: signMessageData, error, isLoading, signMessage, variables } = useSignMessage()
+      const recoveredAddress = useRef<string>()
 
-<<<<<<< HEAD
+      useEffect(()=>{
+        if (variables?.message && signMessageData) {
+          const recoveredAddress = await recoverMessageAddress({
+            message: variables?.message,
+            signature: signMessageData,
+          });
+          setRecoveredAddress(recoveredAddress)
+        }
+      },[signMessageData, variables?.message])
+
+
+      async function signContract(
+         _receiver: Address,
+        supplier: Address,
+        _pickup: string,
+    _delivery: string,
+    _tenderBudget: string,
+    _expectedDate: string,){
+
+      const message  = `
+      Contract Agreement:
+
+      Parties:
+      - Supplier: ${supplier}
+      - Receiver: ${_receiver}
+      
+      Details:
+      - Pickup Location: ${_pickup}
+      - Delivery Location: ${_delivery}
+      - Tender Budget: ${_tenderBudget}
+      - Expected Date: ${_expectedDate}
+      
+      Terms and Conditions:
+      1. The Supplier agrees to provide the specified goods or services to the Receiver in accordance with the details outlined above.
+      2. The Receiver agrees to accept delivery of the goods or services at the designated delivery location.
+      3. The Tender Budget represents the agreed-upon compensation for the goods or services provided by the Supplier.
+      4. The Expected Date indicates the target date by which the goods or services are expected to be delivered to the Receiver.
+      5. Any changes to the agreed-upon terms must be mutually agreed upon and documented in writing by both parties.
+      `;
+        signMessage({ message })
+      }
   
   async function createPkg(
     _receiver: Address,
@@ -179,37 +221,17 @@ export default function CustomerQuot() {
       item.cold_storage
     )
 
+    // signContract(
+    //   item.receiverWallet,
+    //   item.supplier,
+    //   item.pickup,
+    //   item.delivery,
+    //   item.depositBudget,
+    //   item.expectedDate
+    // )
 
 
   };
-=======
-      console.log(response);
-    } catch (error) {
-      console.error("Error fetching supplier data:", error);
-    }
-  };
-
-  const [supplierData, setSupplierData] = useState([]);
-  const [selectedSupplier, setSelectedSupplier] = useState("");
-
-  useEffect(() => {
-    const fetchSupplier = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:7000/api/v1/auth/supplier"
-        );
-        setSupplierData(response.data.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching supplier data:", error);
-      }
-    };
-    fetchData();
-
-    fetchSupplier();
-  }, []);
-  const handleApprove = () => {};
->>>>>>> 3095b8d55c934957ccb54372b6088fbbf34a4b31
 
   return (
     <>
