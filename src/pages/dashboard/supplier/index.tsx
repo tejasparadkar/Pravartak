@@ -56,7 +56,7 @@ export default function Supplier() {
   };
 
   const handleSubmit = async () => {
-    console.log(res[0]._id)
+    console.log(res[0]._id);
     try {
       const response: any = await axios.put(
         `http://localhost:7000/api/v1/cargo/${res[0]._id}`,
@@ -92,7 +92,7 @@ export default function Supplier() {
           </div>
         </div>
 
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-4 h-screen">
           <div className="mx-5 px-5 py-5 rounded-xl border col-span-2 space-y-5">
             <div className="flex space-x-4">
               <h1>Manage Request</h1>
@@ -116,6 +116,15 @@ export default function Supplier() {
           {showDetails && (
             <div className="col-span-2">
               <div className="p-5 border rounded-md">
+                <div className="flex justify-between">
+                  <p>Details</p>
+                  <div
+                    className="w-7 h-7 rounded-full flex hover:bg-gray-200 justify-center items-center cursor-pointer"
+                    onClick={handleClickDetails}
+                  >
+                    <Cross2Icon />
+                  </div>
+                </div>
                 <Table>
                   <TableHeader>
                     <TableRow>

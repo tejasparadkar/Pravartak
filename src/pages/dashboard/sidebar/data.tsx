@@ -4,7 +4,11 @@ import {
   PersonIcon,
   TokensIcon,
 } from "@radix-ui/react-icons";
-import { IconHexagonNumber1, IconHexagonNumber2 } from "@tabler/icons-react";
+import {
+  IconApiApp,
+  IconHexagonNumber1,
+  IconHexagonNumber2,
+} from "@tabler/icons-react";
 
 export interface NavLink {
   role: string;
@@ -41,10 +45,17 @@ export const sidelinks: SideLink[] = [
     icon: <LayersIcon />,
   },
   {
-    role: "supplier",
-    title: "Supplier",
+    role: "lp",
+    title: "Status",
     label: "",
-    href: "/dashboard/supplier",
-    icon: <IconHexagonNumber1 size={18} />,
+    href: "/dashboard/supplier-status",
+    icon: <LayersIcon />,
+  },
+  {
+    role: "lp",
+    title: "Manage Request",
+    label: "",
+    href: "/dashboard/supplier-resuest",
+    icon: <IconApiApp />,
   },
 ];
