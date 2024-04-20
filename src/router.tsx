@@ -37,18 +37,9 @@ const router = createBrowserRouter([
         }),
       },
       {
-        path: "supplier",
+        path: "supplier-request",
         lazy: async () => ({
           Component: (await import("./pages/dashboard/supplier/index")).default,
-          routes: [
-            {
-              path: "details",
-              lazy: async () => ({
-                Component: (await import("./pages/dashboard/supplier/details"))
-                  .default,
-              }),
-            },
-          ],
         }),
       },
       {
