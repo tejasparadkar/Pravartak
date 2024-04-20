@@ -17,8 +17,8 @@ import { useSelector } from "react-redux";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { Button } from "../ui/button";
 import { CheckIcon } from "@radix-ui/react-icons";
-import { useState ,useEffect} from "react";
-import {readContract, writeContract} from 'wagmi/actions'
+import { useState, useEffect } from "react";
+import { readContract, writeContract } from 'wagmi/actions'
 
 const data = [
   { name: "Jan", total: 0 },
@@ -41,6 +41,7 @@ export default function ReceiverDashboard() {
   const { disconnect } = useDisconnect();
 
   const [received, setReceived] = useState(false);
+  const [data, setData] = useState([]);
 
   const handleReceived = () => {
     setReceived(!received);
@@ -54,30 +55,38 @@ export default function ReceiverDashboard() {
 
 
 
-  function getTendersOfReceiver(supplier: string) {
+  function getTendersOfReceiver(receiver: string) {
     return readContract(config, {
       abi,
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      functionName: "getTendersOfSupplier",
-      args: [supplier],
+      functionName: "getTendersOfReceiver",
+      args: [receiver],
     });
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(account.address);
-    getTendersOfReceiver(account.address).then(console.log);
-    
-  },[])
+    getTendersOfReceiver("0x70997970C51812dc3A010C7d01b50e0d17dc79C8").then(it => {
+      console.log(it);
+      setData(it.filter(i => i.stage==1));
+    });  
+  }, [])
 
-  
+
   async function approveByReceiver(batchId: number) {
-    return writeContract(config, {
+    const res = await  writeContract(config, {
       abi,
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       functionName: "approveByReceiver",
       args: [BigInt(batchId)],
       chainId: 1337,
     });
+
+    getTendersOfReceiver("0x70997970C51812dc3A010C7d01b50e0d17dc79C8").then(it => {
+      console.log(it);
+      setData(it.filter(i => i.stage==1));
+    });  
+    return res;
   }
   return (
     <>
@@ -140,19 +149,22 @@ export default function ReceiverDashboard() {
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-7 ">
             <Card className="col-span-1 lg:col-span-4">
               <CardHeader>
-                <CardTitle>Overview</CardTitle>
+                <CardTitle>Pending Request</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                {data.map((e)=>
                 <div className="w-full h-10 flex justify-between">
-                  <p>Label</p>
-                  {received ? (
-                    <Button onClick={handleReceived}>
-                      <CheckIcon />
-                    </Button>
-                  ) : (
-                    <Button onClick={handleReceived}>Mark As Received</Button>
-                  )}
-                </div>
+                <p>{e.label}</p>
+                {received ? (
+                  <Button onClick={handleReceived}>
+                    <CheckIcon />
+                  </Button>
+                ) : (
+                  <Button onClick={ev => approveByReceiver(e.batchId)}>Mark As Received</Button>
+                )}
+              </div>
+                
+                )}
               </CardContent>
             </Card>
           </div>

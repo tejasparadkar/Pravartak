@@ -10,6 +10,7 @@ import { Address, StringToBytesOpts, parseEther } from "viem";
 import { readContract, writeContract } from "wagmi/actions";
 import { config } from "./../../../../wagmi";
 import { useAccount } from "wagmi";
+import { Button } from "../../ui/button";
 
 export default function Status() {
   const role = useSelector((state: any) => state.auth.role);
@@ -26,22 +27,19 @@ export default function Status() {
     });
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(account.address);
-    getTendersOfSupplier(account.address).then(console.log);
-    
-  },[])
+    console.log();
 
-  
-  async function approveBySupplier(batchId: number) {
-    return writeContract(config, {
-      abi,
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      functionName: "approveBySupplier",
-      args: [BigInt(batchId)],
-      chainId: 1337,
-    });
-  }
+
+    getTendersOfSupplier(/*account.address*/"0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC").then(function (it) {
+      setData(it.filter(i => i.stage==0));
+    }); 
+
+  }, []);
+
+
+ 
 
 
   return (
@@ -66,7 +64,7 @@ export default function Status() {
         </div>
         <div className="grid grid-cols-2 py-5">
           <div className="col-span-2 -mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-            <DataTable data={sample} columns={columns} />
+            <DataTable data={data} columns={columns} />
           </div>
         </div>
       </LayoutBody>

@@ -27,7 +27,7 @@ import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data: TData[];  
 }
 
 export function DataTable<TData, TValue>({
