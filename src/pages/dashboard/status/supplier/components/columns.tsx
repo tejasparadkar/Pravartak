@@ -11,10 +11,11 @@ import { Button } from "@/components/ui/button";
 import abi from "../../../../../public/abi/SoftlinkSupplyChainContract.json";
 import { config } from "../../../../../wagmi";
 import { readContract, writeContract } from "wagmi/actions";
+import { toast } from "@/components/ui/use-toast";
 
 
 async function approveBySupplier(batchId: number) {
-  const res = await  writeContract(config, {
+  const res = await writeContract(config, {
     abi,
     address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
     functionName: "approveBySupplier",
@@ -128,9 +129,11 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       const handleButtonClick = () => {
-        approveBySupplier(row.getValue("batchId"));
+        approveBySupplier(row.getValue("batchId")); 
       };
-  
+
+
+
       return (
         <div>
           <Button onClick={handleButtonClick}>Mark Delivered</Button>
@@ -138,6 +141,6 @@ export const columns: ColumnDef<Task>[] = [
       );
     },
   },
-  
+
 ];
 

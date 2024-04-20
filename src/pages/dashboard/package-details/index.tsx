@@ -4,6 +4,8 @@ import Receiver from "./receiver";
 import Details from "./details";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface Details {
   label: string;
@@ -30,7 +32,7 @@ export default function Index() {
   const [submit, setSubmit] = useState<boolean>(false);
   const token = useSelector((state: any) => state.auth.token);
   const id = useSelector((state: any) => state.auth.id);
-
+  const navigate = useNavigate();
   const [details, setDetails] = useState<Details>({
     label: "",
     weight: "",
@@ -91,6 +93,16 @@ export default function Index() {
         }
       );
       console.log(response);
+      toast({
+        title: "Uploads Success",
+        description: "Redirecting",
+        className: "font-Geist bg-green-500 text-white rounded-xl",
+      });
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
+      
     } catch (error) {
       console.log(error);
     }

@@ -32,7 +32,7 @@ export default function Status() {
     console.log();
 
 
-    getTendersOfSupplier(/*account.address*/"0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC").then(function (it) {
+    getTendersOfSupplier(/*account.address*/"0x70997970C51812dc3A010C7d01b50e0d17dc79C8").then(function (it) {
       setData(it.filter(i => i.stage==0));
     }); 
 

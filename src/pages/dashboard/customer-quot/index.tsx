@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/select";
 
 import { Label } from "@/components/ui/label";
+import { toast } from "@/components/ui/use-toast";
 
 export default function CustomerQuot() {
   const id = useSelector((state: any) => state.auth.id);
@@ -46,6 +47,7 @@ export default function CustomerQuot() {
   const [res, setRes] = useState([]);
   const [selectedSupplier, setSelectedSupplier] = useState();
   const [supplierData, setSupplierData] = useState([]);
+  const navigate = useNavigate();
 
   const fetchSuppliers = async () => {
     try {
@@ -77,16 +79,15 @@ export default function CustomerQuot() {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchData()
-  },[])
-
+  }, [])
   const handleUpdate = async (selectedSupplier) => {
     console.log("here");
     console.log(selectedSupplier);
     try {
       const response: any = await axios.put(
-        `http://localhost:7000/api/v1/cargo/${res[0]._id}`,
+        `http://localhost:7000/api/v1/cargo/${res[4]._id}`,
         {
           isApprovedBySupplier: false,
           supplier: selectedSupplier._id,
@@ -147,7 +148,36 @@ export default function CustomerQuot() {
   //   `;
   //     signMessage({ message })
   //   }
+  const handleApproval = async () => {
+    try {
+      const response: any = await axios.put(
+        `http://localhost:7000/api/v1/cargo/${res[4]._id}`,
+        {
+          isApprovedBySupplier: true,
+          isApprovedByOwner: true,
 
+          // supplier: selectedSupplier._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      toast({
+        title: "Approve Success",
+        description: "Redirecting",
+        className: "font-Geist bg-green-500 text-white rounded-xl",
+      });
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
+
+    } catch (error) {
+      console.error("Error fetching supplier data:", error);
+    }
+  };
   async function createPkg(
     _receiver: Address,
     supplier: Address,
@@ -166,6 +196,8 @@ export default function CustomerQuot() {
     _stacking: boolean,
     _cold_storage: boolean
   ) {
+
+
     const res = await writeContract(config, {
       abi,
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
@@ -175,17 +207,17 @@ export default function CustomerQuot() {
         supplier,
         _pickup,
         _delivery,
-        parseEther(_tenderBudget),
+        parseEther(_tenderBudget.toString()),
         _expectedDate,
       ],
-      value: parseEther(_tenderBudget),
+      value: parseEther(_tenderBudget.toString()),
       chainId: 1337,
     });
 
     console.log(res);
 
     // setTimeout(() => {
-    return addPkgDetails(
+    const res2 = await addPkgDetails(
       _label,
       _weight,
       _height,
@@ -198,6 +230,7 @@ export default function CustomerQuot() {
       _cold_storage
     );
     // }, 3000);
+    handleApproval()
   }
 
   async function addPkgDetails(
@@ -233,24 +266,29 @@ export default function CustomerQuot() {
   }
 
   const handleApprove = async (item: any) => {
+
+    console.log(item.supplier, item.receiverWallet);
+
     const res = createPkg(
-      item.receiverWallet,
-      item.supplier,
+      "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+      "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
       item.pickup,
       item.delivery,
       item.depositBudget,
-      item.expectedDate,
+      "10-04-2024",
       item.label,
       item.weight,
-      item.height,
-      item.vol,
-      item.len,
-      item.wid,
-      item.qty,
-      item.p_type,
-      item.stacking,
-      item.cold_storage
+      item.dimensions.height,
+      100,
+      item.dimensions.length,
+      item.dimensions.width,
+      item.quantity,
+      item.cargoType == "non-fragile" ? 1 : 0,
+      item.allow_stacking,
+      false
     );
+    console.log(await res);
+
 
     // signContract(
     //   item.receiverWallet,

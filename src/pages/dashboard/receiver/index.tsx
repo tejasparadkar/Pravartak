@@ -19,6 +19,8 @@ import { Button } from "../ui/button";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { useState, useEffect } from "react";
 import { readContract, writeContract } from 'wagmi/actions'
+import { toast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   { name: "Jan", total: 0 },
@@ -39,7 +41,7 @@ export default function ReceiverDashboard() {
   const account = useAccount();
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();
-
+  const navigate = useNavigate();
   const [received, setReceived] = useState(false);
   const [data, setData] = useState([]);
 
@@ -66,26 +68,34 @@ export default function ReceiverDashboard() {
 
   useEffect(() => {
     console.log(account.address);
-    getTendersOfReceiver("0x70997970C51812dc3A010C7d01b50e0d17dc79C8").then(it => {
+    getTendersOfReceiver("0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC").then(it => {
       console.log(it);
-      setData(it.filter(i => i.stage==1));
-    });  
+      setData(it.filter(i => i.stage == 1));
+    });
   }, [])
 
 
   async function approveByReceiver(batchId: number) {
-    const res = await  writeContract(config, {
+    const res = await writeContract(config, {
       abi,
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       functionName: "approveByReceiver",
       args: [BigInt(batchId)],
       chainId: 1337,
     });
+    toast({
+      title: "Success",
+      description: "Redirecting",
+      className: "font-Geist bg-green-500 text-white rounded-xl",
+    });
+    setTimeout(() => {
+      navigate("/dashboard/receiver");
+    }, 1000);
 
-    getTendersOfReceiver("0x70997970C51812dc3A010C7d01b50e0d17dc79C8").then(it => {
+    getTendersOfReceiver("0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC").then(it => {
       console.log(it);
-      setData(it.filter(i => i.stage==1));
-    });  
+      setData(it);
+    });
     return res;
   }
   return (
@@ -152,18 +162,18 @@ export default function ReceiverDashboard() {
                 <CardTitle>Pending Request</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {data.map((e)=>
-                <div className="w-full h-10 flex justify-between">
-                <p>{e.label}</p>
-                {received ? (
-                  <Button onClick={handleReceived}>
-                    <CheckIcon />
-                  </Button>
-                ) : (
-                  <Button onClick={ev => approveByReceiver(e.batchId)}>Mark As Received</Button>
-                )}
-              </div>
-                
+                {data.map((e) =>
+                  <div className="w-full h-10 flex justify-between">
+                    <p>{e.label}</p>
+                    {received ? (
+                      <Button onClick={handleReceived}>
+                        <CheckIcon />
+                      </Button>
+                    ) : (
+                      <Button onClick={ev => approveByReceiver(e.batchId)}>Mark As Received</Button>
+                    )}
+                  </div>
+
                 )}
               </CardContent>
             </Card>
