@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import abi from "../../../../public/abi/SoftlinkSupplyChainContract.json";
 import { Address, StringToBytesOpts, parseEther } from "viem";
-import { readContract } from "viem/actions";
+import { readContract, writeContract } from "wagmi/actions";
 import { config } from "./../../../../wagmi";
 import { useAccount } from "wagmi";
 
@@ -17,7 +17,7 @@ export default function Status() {
   const [data, setData] = useState([]);
   const account = useAccount();
 
-  function getTendersOfSupplier(supplier: Address) {
+  function getTendersOfSupplier(supplier: string) {
     return readContract(config, {
       abi,
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
@@ -28,8 +28,21 @@ export default function Status() {
 
   useEffect(()=>{
     console.log(account.address);
-    getTendersOfSupplier(account.address);
+    getTendersOfSupplier(account.address).then(console.log);
+    
   },[])
+
+  
+  async function approveBySupplier(batchId: number) {
+    return writeContract(config, {
+      abi,
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      functionName: "approveBySupplier",
+      args: [BigInt(batchId)],
+      chainId: 1337,
+    });
+  }
+
 
   return (
     <Layout className="md:pl-10">

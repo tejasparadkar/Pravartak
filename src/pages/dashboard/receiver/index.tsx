@@ -3,7 +3,43 @@ import { Layout, LayoutBody, LayoutHeader } from "../ui/layout";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import sample from "./data/sample";
+import { useAccount,readContract } from "wagmi";
+import { writeContract } from "wagmi/actions";
+import { config } from "./../../../../wagmi";
+
+import { useEffect, useState } from "react";
+
+import abi from "../../../public/abi/SoftlinkSupplyChainContract.json";
+
 export default function Status() {
+
+  const account = useAccount();
+
+  function getTendersOfReceiver(supplier: string) {
+    return readContract(config, {
+      abi,
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      functionName: "getTendersOfSupplier",
+      args: [supplier],
+    });
+  }
+
+  useEffect(()=>{
+    console.log(account.address);
+    getTendersOfReceiver(account.address).then(console.log);
+    
+  },[])
+
+  
+  async function approveByReceiver(batchId: number) {
+    return writeContract(config, {
+      abi,
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      functionName: "approveByReceiver",
+      args: [BigInt(batchId)],
+      chainId: 1337,
+    });
+  }
   return (
     <Layout className="md:pl-10">
       {/* ===== Top Heading ===== */}
