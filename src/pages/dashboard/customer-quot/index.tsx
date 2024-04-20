@@ -5,7 +5,12 @@ import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { useAccount, useConnect, useDisconnect, useReadContract } from "wagmi";
 import abi from "../../../public/abi/SoftlinkSupplyChainContract.json";
-import { Address, StringToBytesOpts, parseEther, recoverMessageAddress } from "viem";
+import {
+  Address,
+  StringToBytesOpts,
+  parseEther,
+  recoverMessageAddress,
+} from "viem";
 import {
   readContract,
   simulateContract,
@@ -39,6 +44,20 @@ export default function CustomerQuot() {
   const id = useSelector((state: any) => state.auth.id);
   const token = useSelector((state: any) => state.auth.token);
   const [res, setRes] = useState([]);
+  const [selectedSupplier, setSelectedSupplier] = useState();
+  const [supplierData, setSupplierData] = useState([]);
+
+  const fetchSuppliers = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:7000/api/v1/auth/supplier"
+      );
+      setSupplierData(response.data.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching supplier data:", error);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -59,6 +78,8 @@ export default function CustomerQuot() {
   };
 
   const handleUpdate = async (selectedSupplier) => {
+    console.log("here");
+    console.log(selectedSupplier);
     try {
       const response: any = await axios.put(
         `http://localhost:7000/api/v1/cargo/${res[0]._id}`,
@@ -72,51 +93,57 @@ export default function CustomerQuot() {
           },
         }
       );
-      const { data: signMessageData, error, isLoading, signMessage, variables } = useSignMessage()
-      const recoveredAddress = useRef<string>()
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching supplier data:", error);
+    }
+  };
 
-      useEffect(()=>{
-        if (variables?.message && signMessageData) {
-          const recoveredAddress = await recoverMessageAddress({
-            message: variables?.message,
-            signature: signMessageData,
-          });
-          setRecoveredAddress(recoveredAddress)
-        }
-      },[signMessageData, variables?.message])
+  //   const { data: signMessageData, error, isLoading, signMessage, variables } = useSignMessage()
+  //   const recoveredAddress = useRef<string>()
 
+  useEffect(() => {
+    // if (variables?.message && signMessageData) {
+    //   const recoveredAddress = await recoverMessageAddress({
+    //     message: variables?.message,
+    //     signature: signMessageData,
+    //   });
+    //   setRecoveredAddress(recoveredAddress)
+    // }
+    fetchSuppliers(), fetchData();
+  }, []);
 
-      async function signContract(
-         _receiver: Address,
-        supplier: Address,
-        _pickup: string,
-    _delivery: string,
-    _tenderBudget: string,
-    _expectedDate: string,){
+  //   async function signContract(
+  //      _receiver: Address,
+  //     supplier: Address,
+  //     _pickup: string,
+  // _delivery: string,
+  // _tenderBudget: string,
+  // _expectedDate: string,){
 
-      const message  = `
-      Contract Agreement:
+  //   const message  = `
+  //   Contract Agreement:
 
-      Parties:
-      - Supplier: ${supplier}
-      - Receiver: ${_receiver}
-      
-      Details:
-      - Pickup Location: ${_pickup}
-      - Delivery Location: ${_delivery}
-      - Tender Budget: ${_tenderBudget}
-      - Expected Date: ${_expectedDate}
-      
-      Terms and Conditions:
-      1. The Supplier agrees to provide the specified goods or services to the Receiver in accordance with the details outlined above.
-      2. The Receiver agrees to accept delivery of the goods or services at the designated delivery location.
-      3. The Tender Budget represents the agreed-upon compensation for the goods or services provided by the Supplier.
-      4. The Expected Date indicates the target date by which the goods or services are expected to be delivered to the Receiver.
-      5. Any changes to the agreed-upon terms must be mutually agreed upon and documented in writing by both parties.
-      `;
-        signMessage({ message })
-      }
-  
+  //   Parties:
+  //   - Supplier: ${supplier}
+  //   - Receiver: ${_receiver}
+
+  //   Details:
+  //   - Pickup Location: ${_pickup}
+  //   - Delivery Location: ${_delivery}
+  //   - Tender Budget: ${_tenderBudget}
+  //   - Expected Date: ${_expectedDate}
+
+  //   Terms and Conditions:
+  //   1. The Supplier agrees to provide the specified goods or services to the Receiver in accordance with the details outlined above.
+  //   2. The Receiver agrees to accept delivery of the goods or services at the designated delivery location.
+  //   3. The Tender Budget represents the agreed-upon compensation for the goods or services provided by the Supplier.
+  //   4. The Expected Date indicates the target date by which the goods or services are expected to be delivered to the Receiver.
+  //   5. Any changes to the agreed-upon terms must be mutually agreed upon and documented in writing by both parties.
+  //   `;
+  //     signMessage({ message })
+  //   }
+
   async function createPkg(
     _receiver: Address,
     supplier: Address,
@@ -154,7 +181,7 @@ export default function CustomerQuot() {
     console.log(res);
 
     // setTimeout(() => {
-   return addPkgDetails(
+    return addPkgDetails(
       _label,
       _weight,
       _height,
@@ -201,7 +228,7 @@ export default function CustomerQuot() {
     });
   }
 
-  const handleApprove = async (item:any) => {
+  const handleApprove = async (item: any) => {
     const res = createPkg(
       item.receiverWallet,
       item.supplier,
@@ -219,7 +246,7 @@ export default function CustomerQuot() {
       item.p_type,
       item.stacking,
       item.cold_storage
-    )
+    );
 
     // signContract(
     //   item.receiverWallet,
@@ -229,8 +256,6 @@ export default function CustomerQuot() {
     //   item.depositBudget,
     //   item.expectedDate
     // )
-
-
   };
 
   return (
@@ -254,9 +279,7 @@ export default function CustomerQuot() {
                     <p>{item.label}</p>
                     <p>{item.supplier.name}</p>
                     <p>${item.depositBudget}</p>
-                    <Button onClick={() => handleApprove(item)}>
-                      Approve
-                    </Button>
+                    <Button onClick={() => handleApprove(item)}>Approve</Button>
 
                     <Dialog>
                       <DialogTrigger asChild>
@@ -293,7 +316,6 @@ export default function CustomerQuot() {
                               className="w-1/2"
                               onClick={() => {
                                 handleUpdate(selectedSupplier);
-                                console.log(selectedSupplier);
                               }}
                             >
                               Submit
