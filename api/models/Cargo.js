@@ -16,7 +16,6 @@ const CargoSchema = new mongoose.Schema(
     docsIPFS: { type: String },
     completedPayment: { type: Boolean, default: false },
     depositBudget: { type: Number },
-    issuedAt: { type: Date, default: Date.now },
     cargoType: {
       type: String,
       enum: ["fragile", "non-fragile", "cold storage"],
